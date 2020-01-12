@@ -8,6 +8,8 @@ Image *pSrcImage;
 
 Image *EMSCRIPTEN_KEEPALIVE setSrcImage(BYTE *jpegData, ULONG size)
 {
+    free(pSrcImage->data);
+    free(pSrcImage);
     pSrcImage = readJpeg(jpegData, size);
     EM_ASM({ console.log('setSrcImage done'); });
     return pSrcImage;
